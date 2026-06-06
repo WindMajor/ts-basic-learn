@@ -107,6 +107,7 @@ console.log(first, second); // 100, 0
 // 使用场景：从对象中提取属性，函数参数解构
 // ==========================================
 
+// person是匿名内联对象类型，右边的是对象字面量
 const person = { name: "Alice", age: 30, city: "Beijing" };
 const { name: personName, age, city = "Unknown" } = person;
 console.log(personName, age, city);

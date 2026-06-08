@@ -304,13 +304,17 @@ function testTDZ() {
 }
 testTDZ();
 
-// typeof 未声明变量返回 undefined（全局对象属性检查）
-// 但在 TDZ 内使用 typeof 也会报错
+// typeof 对未声明变量有特殊保护（不报错，返回 "undefined"）
+// 即使在严格模式或模块作用域下，typeof 也不会抛出 ReferenceError
+// @ts-ignore 故意演示未声明变量
+console.log(typeof undeclaredVar); // "undefined"（不会报错！）
+
+// 对比：直接访问未声明变量会报 ReferenceError
 try {
-  // @ts-ignore 故意演示 TDZ
-  console.log(typeof undeclaredVar); // undefined（全局作用域）
+  // @ts-ignore 故意演示未声明变量直接访问
+  console.log(undeclaredVar);
 } catch (e: any) {
-  console.log('typeof 未声明变量报错:', e.message);
+  console.log('直接访问未声明变量报错:', e.message); // ReferenceError: undeclaredVar is not defined
 }
 
 // ============================================================
@@ -486,6 +490,8 @@ console.log('\n=== 错误示例 ===');
 
 // ---- 错误 1：var 在 for 循环 + setTimeout 中输出全是最终值 ----
 // 错误原因：var 只有函数作用域，没有块级作用域，三个 setTimeout 共享同一个 i
+// 注意：在 ES 模块中 var 不会泄漏为全局变量（模块有自己的顶层作用域），
+// 但函数/块级作用域内的表现不变——仍然会穿透块作用域
 // 修复方案：改用 let（每次迭代新绑定），或用 IIFE 创建独立作用域
 
 for (var i = 0; i < 3; i++) {

@@ -43,7 +43,8 @@ Person.prototype.greet = function () {
   return `Hello, I'm ${this.name}`;
 };
 
-const p = new (Person as any)('Alice');
+// @ts-expect-error 标注了 this 参数的函数不被 TS 视为构造函数签名，但运行时 new 调用是合法的
+const p = new Person('Alice');
 console.log('p.name:', p.name);                     // Alice
 console.log('p.greet():', p.greet());               // Hello, I'm Alice
 
@@ -144,7 +145,8 @@ console.log('显式绑定 bind:', boundFn().name);                 // BoundObj
 function ConstructorThis(this: any) {
   this.label = 'from-new';
 }
-const newInstance = new (ConstructorThis as any)();
+// @ts-expect-error 与 Person 同理：TS 严格检查与运行时行为不一致
+const newInstance = new ConstructorThis();
 console.log('new 绑定:', newInstance.label);                    // from-new
 
 // ============================================================

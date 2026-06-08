@@ -61,11 +61,7 @@ console.log(greetUser("Bob", "Hi")); // Hi, Bob!
 // 使用场景：为参数提供默认值，简化调用方代码
 // ==========================================
 
-function createURL(
-  protocol: string = "https",
-  domain: string,
-  path: string = "/"
-): string {
+function createURL(protocol: string = "https", domain: string, path: string = "/"): string {
   return `${protocol}://${domain}${path}`;
 }
 
@@ -160,10 +156,9 @@ const wrongAdd = add(5);
 // @ts-expect-error 参数类型不匹配：期望 number，给了 string
 const wrongType = add("1", "2");
 
-// @ts-expect-error 可选参数必须在必选参数之后，此处演示非法写法
-function badOptional(a?: number, b: number): number {
-  return (a ?? 0) + b;
-}
+// ❌ 语法错误：可选参数不能位于必选参数之前
+// 原因：调用时若只传 1 个参数，编译器无法判断是传给 a 还是 b
+// function badOptional(a?: number, b: number): number { ... }
 
 // ==========================================
 // 本章小结

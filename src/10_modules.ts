@@ -160,7 +160,14 @@ declare const GLOBAL_CONFIG: {
 
 // import { Calculator } from "./10_modules.js"; // ❌ 若仅用于类型，应使用 import type
 
-// const { add } = import("./01_variables.js"); // ❌ 动态导入需要 await 或 .then()
+// ❌ 错误：动态导入返回 Promise，缺少 await 直接解构
+// const { add } = import("./01_variables.js");
+// 运行时结果：add === undefined（解构的是 Promise 对象，不是模块导出）
+
+// ✅ 正确写法：
+// const { add } = await import("./01_variables.js");
+// 或
+// import("./01_variables.js").then(({ add }) => { ... });
 
 // ==========================================
 // 本章小结

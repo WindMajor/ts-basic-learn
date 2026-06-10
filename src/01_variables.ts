@@ -18,7 +18,7 @@
 
 // const：声明常量，引用不可变
 const PI: number = 3.14159;
-const USER_NAME: string = "Alice";
+const USER_NAME: string = 'Alice';
 
 // let：声明可变变量
 let count: number = 0;
@@ -40,7 +40,7 @@ function oldStyle(): void {
 
 function blockScopeDemo(): void {
   if (true) {
-    const blockConst = "只在 if 块内可见";
+    const blockConst = '只在 if 块内可见';
     let blockLet = 42;
     console.log(blockConst, blockLet);
   }
@@ -54,7 +54,7 @@ function blockScopeDemo(): void {
 
 function temporalDeadZoneDemo(): void {
   // console.log(tdZVar); // ❌ 运行时错误：Cannot access 'tdZVar' before initialization
-  const tdZVar = "声明后才能使用";
+  const tdZVar = '声明后才能使用';
   console.log(tdZVar);
 }
 
@@ -63,7 +63,7 @@ function temporalDeadZoneDemo(): void {
 // 使用场景：为变量明确指定类型，增强可读性和编译期检查
 // ==========================================
 
-const message: string = "Hello, TypeScript!";
+const message: string = 'Hello, TypeScript!';
 const score: number = 95.5;
 const isActive: boolean = true;
 
@@ -72,7 +72,7 @@ const isActive: boolean = true;
 // 使用场景：简单初始化时让编译器自动推断类型，减少冗余代码
 // ==========================================
 
-const inferredString = "TypeScript 会推断这是 string 类型"; // 自动推断为 string
+const inferredString = 'TypeScript 会推断这是 string 类型'; // 自动推断为 string
 const inferredNumber = 100; // 自动推断为 number
 
 // 显式注解 vs 推断的选择原则：
@@ -86,7 +86,7 @@ const inferredNumber = 100; // 自动推断为 number
 // ==========================================
 
 const MAX_RETRY_COUNT = 3; // 常量使用大写下划线
-let currentUserName = "Bob"; // 普通变量使用小驼峰
+let currentUserName = 'Bob'; // 普通变量使用小驼峰
 const isUserLoggedIn = true; // 布尔值用 is/has/should 前缀
 
 // ==========================================
@@ -108,15 +108,15 @@ console.log(first, second); // 100, 0
 // ==========================================
 
 // person是匿名内联对象类型，右边的是对象字面量
-const person = { name: "Alice", age: 30, city: "Beijing" };
-const { name: personName, age, city = "Unknown" } = person;
+const person = { name: 'Alice', age: 30, city: 'Beijing' };
+const { name: personName, age, city = 'Unknown' } = person;
 console.log(personName, age, city);
 
 // 函数参数中使用解构
 function printUser({ name, age }: { name: string; age: number }): void {
   console.log(`${name} is ${age} years old`);
 }
-printUser({ name: "Tom", age: 25 });
+printUser({ name: 'Tom', age: 25 });
 
 // ==========================================
 // 示例 9：嵌套解构
@@ -127,7 +127,7 @@ const nestedData = {
   user: {
     id: 1,
     profile: {
-      email: "alice@example.com",
+      email: 'alice@example.com',
     },
   },
 };
@@ -155,13 +155,13 @@ function hoistingDemo(): void {
 
 let strictNumber: number = 42;
 // @ts-expect-error 类型 'string' 不能赋值给类型 'number'
-strictNumber = "not a number";
+strictNumber = 'not a number';
 
 // ==========================================
 // 本章小结
 // ==========================================
 // 1. 优先使用 const，需要重新赋值时使用 let，避免使用 var
 // 2. TypeScript 的块级作用域与大多数现代语言一致（Java/Rust/C++ 都有）
-// 3. let/const 存在暂时性死区（TDZ），声明前访问会报错
+// 3. let/const 存在暂时性死区（TDZ），声明前访问会报错。对比：var声明被提升并初始化为 undefined，提前访问不报错
 // 4. 简单初始化可依赖类型推断，复杂场景显式注解更清晰
 // 5. 解构赋值能大幅简化从数组/对象中提取数据的代码

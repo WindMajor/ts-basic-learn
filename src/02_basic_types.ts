@@ -22,7 +22,7 @@ const userAge: number = 10;
 const isAwesome: boolean = true;
 
 // 模板字符串也归 string 类型
-const greeting: string = `Hello, ${userName}! You are ${userAge} years old.`;
+const greeting: string = `Hello, ${userName}! You are ${userAge} years old. You are ${isAwesome}`;
 console.log(greeting);
 
 // ==========================================
@@ -115,12 +115,15 @@ console.log(`bigNumber + anotherBig = ${bigNumber + anotherBig}`);
 
 const sym1: symbol = Symbol('description');
 const sym2: symbol = Symbol('description');
+
 console.log(`sym1 === sym2 = ${sym1 === sym2}`); // false，每个 Symbol 都是唯一的
 
 console.log(`typeof sym1 = ${typeof sym1}`);
 
 const sym3 = sym1;
 console.log(`typeof sym3 = ${typeof sym3}`);
+
+console.log(sym1 === sym2); // false，每个 Symbol 都是唯一的
 
 const secretKey = Symbol('secret');
 const objWithSymbol = {

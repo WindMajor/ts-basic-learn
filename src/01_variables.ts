@@ -144,8 +144,8 @@ console.log(id, email);
 // 错误示例（故意编写，展示常见错误）
 // ==========================================
 
-// @ts-expect-error const 声明的变量不能重新赋值
-PI = 3.14;
+// const 声明的变量不能重新赋值 TypeError: Assignment to constant variable.
+// PI = 3.14;
 
 function hoistingDemo(): void {
   // @ts-expect-error 在声明前访问 let 变量是错误（暂时性死区 TDZ）
@@ -154,8 +154,10 @@ function hoistingDemo(): void {
 }
 
 let strictNumber: number = 42;
-// @ts-expect-error 类型 'string' 不能赋值给类型 'number'
+
+// @ts-expect-error 类型 'string' 不能赋值给类型 'number'。但执行起来不报错，TypeScript 类型错误只在编译时检查，运行时 JavaScript 根本不关心类型
 strictNumber = 'not a number';
+console.log(strictNumber);
 
 // ==========================================
 // 本章小结
